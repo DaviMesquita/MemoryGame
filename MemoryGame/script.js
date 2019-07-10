@@ -52,7 +52,14 @@
                     restartcheck = 1;
                     $img1 = $(e.target);
                     n1 = $img1.data('n');
-                    fadesetup($img1, imagenssalvas[n1]);
+                    $img1.data('src', imagenssalvas[n1]);
+                    $img1.fadeOut(() =>{
+                        $img1.attr('src', imagenssalvas[n1]);
+                        $img1.fadeIn(300,() =>{
+                            $img1.stop();
+                        });
+                        $img1.stop();
+                    });
                 }
                 else{
                     $img2 = $(e.target);
@@ -60,6 +67,7 @@
                     if(n1 !== n2){
                         fadesetup($img2, imagenssalvas[n2]);
                         if($img1.data('src') === ($img2.data('src'))){
+                            animando = 0;
                             pares++;
                             $img1.parent().unbind();
                             $img2.parent().unbind();
